@@ -1,0 +1,23 @@
+                                        #Homework1
+
+import pandas as pd
+
+# Load the dataset
+file_path = "/mnt/data/gtsrb_dataset.csv"
+df = pd.read_csv(file_path)
+
+# Display basic info and the first few rows
+df.info(), df.head()
+                                           
+# Count the number of samples per label
+label_counts = df['label'].value_counts()
+
+# Select only labels with at least 800 samples
+valid_labels = label_counts[label_counts >= 800].index
+
+# Filter the dataframe to include only those labels
+filtered_df = df[df['label'].isin(valid_labels)]
+
+# Show label counts after filtering
+filtered_label_counts = filtered_df['label'].value_counts().sort_index()
+filtered_df.shape, filtered_label_counts
